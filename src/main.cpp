@@ -1,21 +1,31 @@
 #include "Classifier.h"
 
 #define CPU_ONLY 1
-#define Folder_file 1
-//#define Txt_file 1
+//#define Folder_file 1
+#define Txt_file 1
 
 int main(int argc, char** argv) {
 
     ::google::InitGoogleLogging(argv[0]);
 
-    string model_file   = "./210classes/imagenet_deploy.prototxt";
-    string trained_file = "./210classes/caffenet_train_iter_30000.caffemodel";
-    string mean_file    = "./210classes/imagenet_mean.binaryproto";
-    string label_file   = "./210classes/label.txt";
+//    string model_file   = "./alphanumeric/imagenet_deploy.prototxt";
+//    string trained_file = "./alphanumeric/caffenet_train_iter_4680.caffemodel";
+//    string mean_file    = "./alphanumeric/imagenet_mean.binaryproto";
+//    string label_file   = "./alphanumeric/label.txt";
+
+    string model_file   = "./400classes/imagenet_deploy.prototxt";
+    string trained_file = "./400classes/caffenet_train_iter_500.caffemodel";
+    string mean_file    = "./400classes/imagenet_mean.binaryproto";
+    string label_file   = "./400classes/label.txt";
+
+//    string model_file   = "./400classes/googlenet_deploy.prototxt";
+//    string trained_file = "./400classes/Googlenet_train_iter_38000.caffemodel";
+//    string mean_file    = "./400classes/googlenet_mean.binaryproto";
+//    string label_file   = "./400classes/label.txt";
 
     Classifier classifier(model_file, trained_file, mean_file, label_file);
 
-    string test_file_path = "/home/lin/workspace/caffe_test/build/new";
+    string test_file_path = "./new";
     int classes = 10;   //total classes
     float count = 0;  	//for accuracy
     float TotalNumberOfTestImages = 0;
@@ -40,7 +50,7 @@ int main(int argc, char** argv) {
 
   #ifdef Txt_file
       //read file form TXT
-      ifstream testFile("./210classes/Test.txt");
+      ifstream testFile("./400classes/Test.txt");
       string strtmp;
       vector<string> vect,vect_class;
       while(getline(testFile, strtmp, '\n')){
@@ -64,10 +74,10 @@ int main(int argc, char** argv) {
           /* Print the top N predictions. */
           for (size_t i = 0; i < predictions.size(); ++i) {
               Prediction p = predictions[i];
-//            std::cout << std::fixed << std::setprecision(4) << p.second << " - \""
-//                      << p.first << "\"" << std::endl;
-              result << std::fixed << std::setprecision(4) << p.second << " - \""
-                     << p.first  << std::endl;
+            std::cout << std::fixed << std::setprecision(4) << p.second << " - \""
+                      << p.first << "\"" << std::endl;
+//              result << std::fixed << std::setprecision(4) << p.second << " - \""
+//                     << p.first  << std::endl;
 
               //string to number
               int predicted_class;
@@ -104,3 +114,4 @@ int main(int argc, char** argv) {
                 << "\nTime used: " << timeuse << " seconds." << std::endl;
 
 }
+
