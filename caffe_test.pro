@@ -15,22 +15,24 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 # 添加头文件路径
-#CV_INC = /usr/local/include
+#CV_INC = /usr/include
 CUDA_PATH = /usr/local/cuda
 BLAS_PATH = /opt/OpenBLAS
 # 添加lib文件路径
+#CV_LIB = /usr/lib/x86_64-linux-gnu/
 CV_LIB = /usr/local/lib
-
 DESTDIR = $${PWD}/build
 
 INCLUDEPATH += $${PWD}/include \
                $${CUDA_PATH}/include \
-               $${BLAS_PATH}/include
+               $${BLAS_PATH}/include \
+#               $${CV_INC}
 
 LIBS += -L$${BLAS_PATH}/lib -lopenblas \
         -lglog \
         -L$${PWD}/lib -lcaffe \
-        -L$${CV_LIB} -lopencv_ml -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_video -lopencv_legacy
+        -L$${CV_LIB} -lopencv_ml -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_video\
+             -lopencv_legacy -lopencv_imgcodecs
 
 SOURCES += src/main.cpp \
     src/Classifier.cpp \

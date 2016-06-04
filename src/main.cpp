@@ -1,27 +1,29 @@
 #include "Classifier.h"
 
-#define CPU_ONLY 1
 //#define Folder_file 1
 #define Txt_file 1
+
 
 int main(int argc, char** argv) {
 
     ::google::InitGoogleLogging(argv[0]);
 
-//    string model_file   = "./alphanumeric/imagenet_deploy.prototxt";
-//    string trained_file = "./alphanumeric/caffenet_train_iter_4680.caffemodel";
-//    string mean_file    = "./alphanumeric/imagenet_mean.binaryproto";
-//    string label_file   = "./alphanumeric/label.txt";
+    ifstream testFile("./blood_urine_serum/Test.txt");
+    string model_file   = "./blood_urine_serum/googlenet_deploy.prototxt";
+    string trained_file = "./blood_urine_serum//Googlenet_431plus_train_iter_80000.caffemodel";
+    string mean_file    = "./blood_urine_serum/_mean.binaryproto";
+    string label_file   = "./blood_urine_serum/label.txt";
 
-    string model_file   = "./400classes/imagenet_deploy.prototxt";
-    string trained_file = "./400classes/caffenet_train_iter_500.caffemodel";
-    string mean_file    = "./400classes/imagenet_mean.binaryproto";
-    string label_file   = "./400classes/label.txt";
-
-//    string model_file   = "./400classes/googlenet_deploy.prototxt";
-//    string trained_file = "./400classes/Googlenet_train_iter_38000.caffemodel";
-//    string mean_file    = "./400classes/googlenet_mean.binaryproto";
+//    string model_file   = "/media/lin/2/imagenet_deploy.prototxt";
+//    string trained_file = "/media/lin/2/caffenet_train_iter_50000.caffemodel";
+//    string mean_file    = "/media/lin/2/imagenet_mean.binaryproto";
 //    string label_file   = "./400classes/label.txt";
+
+//    ifstream testFile("./15classes_number/Test1.lst");
+//    string model_file   = "./15classes_number/deploy.prototxt";
+//    string trained_file = "./15classes_number/bvlc_googlenet_iter_1200.caffemodel";
+//    string mean_file    = "./15classes_number/_mean.binaryproto";
+//    string label_file   = "./15classes_number/label.txt";
 
     Classifier classifier(model_file, trained_file, mean_file, label_file);
 
@@ -50,7 +52,6 @@ int main(int argc, char** argv) {
 
   #ifdef Txt_file
       //read file form TXT
-      ifstream testFile("./400classes/Test.txt");
       string strtmp;
       vector<string> vect,vect_class;
       while(getline(testFile, strtmp, '\n')){
