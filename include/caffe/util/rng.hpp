@@ -17,7 +17,7 @@ inline rng_t* caffe_rng() {
   return static_cast<caffe::rng_t*>(Caffe::rng_stream().generator());
 }
 
-// Fisher鈥揧ates algorithm
+// Fisher–Yates algorithm
 template <class RandomAccessIterator, class RandomGenerator>
 inline void shuffle(RandomAccessIterator begin, RandomAccessIterator end,
                     RandomGenerator* gen) {
